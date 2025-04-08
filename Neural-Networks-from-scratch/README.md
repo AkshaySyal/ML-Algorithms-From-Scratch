@@ -4,9 +4,9 @@ Training images: 60,000
 Testing images: 10,000
 Image size: 28x28
 
-##Architecture 
-###1 hidden layer
-###Loss function: Cross-entropy loss
-###Activation function:
+## Architecture 
+### 1 hidden layer
+### Loss function: Cross-entropy loss
+### Activation function:
 - Sigmoid (Hidden layer)
 - Softmax (Output layer)
