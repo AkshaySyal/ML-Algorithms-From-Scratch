@@ -1,12 +1,17 @@
-Implemented a simple neural network for classification with mini batch gradient descent.
-Dataset: MNIST Handwritten digit images (0-9)
-Training images: 60,000
-Testing images: 10,000
-Image size: 28x28
+Implemented a simple neural network for classification with mini batch gradient descent.<br>
+Dataset: MNIST Handwritten digit images (0-9) <br>
+Training images: 50,000 <br>
+Testing images: 10,000 <br>
+Image size: 28x28 <br>
 
-## Architecture 
+## Architecture
 ### 1 hidden layer
 ### Loss function: Cross-entropy loss
 ### Activation function:
 - Sigmoid (Hidden layer)
 - Softmax (Output layer)
+## Hyperparameters
+### Learning Rate: 5
+### Number of hidden units: 300
+### Batch size: 1000
+### Epochs: 30
