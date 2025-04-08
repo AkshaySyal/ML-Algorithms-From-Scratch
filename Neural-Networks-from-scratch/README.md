@@ -1,4 +1,4 @@
-Implemented a simple neural network for classification with mini batch gradient descent.<br>
+## Implemented Neural Network for classification with mini batch gradient descent using numpy<br>
 Dataset: MNIST Handwritten digit images (0-9) <br>
 Training images: 50,000 <br>
 Testing images: 10,000 <br>
