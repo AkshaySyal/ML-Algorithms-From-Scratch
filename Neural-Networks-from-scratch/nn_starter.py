@@ -18,7 +18,7 @@ class NN:
         Compute the sigmoid function for the input here.
         """
         ### YOUR CODE HERE
-
+        s = 1 / (1 + np.exp(-x))
         ### END YOUR CODE
         return s
 
@@ -27,7 +27,7 @@ class NN:
         Compute the derivative of the sigmoid function here.
         """
         ### YOUR CODE HERE
-
+        d = self.sigmoid(x)*(1-self.sigmoid(x))
         ### END YOUR CODE
         return d
 
@@ -36,7 +36,8 @@ class NN:
         Compute softmax function for input.
         """
         ### YOUR CODE HERE
-
+        d = np.sum(np.exp(x),axis=1,keepdims=True)
+        s = np.exp(x)/d
         ### END YOUR CODE
         return s
 
@@ -74,12 +75,26 @@ class NN:
 
     def init_weights(self, n_input):
         ### YOUR CODE HERE
+        
+        # 784x300 = 235200
+        weights_1 = np.random.normal(loc=0, scale=1, size=(784,300))
+        with open('weights_1.pkl', 'wb') as f:
+            pickle.dump(weights_1, f)
 
+        # 300x10
+        weights_2 = np.random.normal(loc=0, scale=1, size=(300,10))
+        with open('weights_2.pkl', 'wb') as f:
+            pickle.dump(weights_2, f)
+
+        # Bias terms (1x300), initialized to 0
+        bias = np.zeros((1,300))
+        with open('bias.pkl', 'wb') as f:
+            pickle.dump(bias, f)
         ### END YOUR CODE
 
     def update_weights(self, grads):
         ### YOUR CODE HERE
-
+        
         ### END YOUR CODE
 
     def compute_loss(self, y, output):
