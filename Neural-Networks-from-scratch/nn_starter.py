@@ -48,6 +48,17 @@ class NN:
                output: the predictions of the network
         """
         ### YOUR CODE HERE
+        with open('weights_1.pkl', 'rb') as f:
+            weights_1 = pickle.load(f)
+        with open('weights_2.pkl', 'rb') as f:
+            weights_2 = pickle.load(f)
+        with open('bias.pkl', 'wb') as f:
+            bias = pickle.load(f)
+        
+        Z1 = X @ weights_1 + bias # 1000,300
+        A1 = self.sigmoid(Z_1) 
+        Z2 = Z_1 @ weights_2 # 1000,10
+        A2 = self.softmax(Z_2)
 
         ### END YOUR CODE
         cache = {}
@@ -55,7 +66,7 @@ class NN:
         cache['A1'] = A1
         cache['Z2'] = Z2
         cache['A2'] = A2
-        return cache, output
+        return cache, A2
 
     def back_propagate(self, X, y, cache):
         """
@@ -87,14 +98,19 @@ class NN:
             pickle.dump(weights_2, f)
 
         # Bias terms (1x300), initialized to 0
-        bias = np.zeros((1,300))
-        with open('bias.pkl', 'wb') as f:
-            pickle.dump(bias, f)
+        bias_1 = np.zeros((1,300))
+        with open('bias_1.pkl', 'wb') as f:
+            pickle.dump(bias_1, f)
+
+        bias_2 = np.zeros((1,300))
+        with open('bias_2.pkl', 'wb') as f:
+            pickle.dump(bias_2, f)
+
         ### END YOUR CODE
 
     def update_weights(self, grads):
         ### YOUR CODE HERE
-        
+
         ### END YOUR CODE
 
     def compute_loss(self, y, output):
@@ -102,6 +118,12 @@ class NN:
         Return the cross-entropy loss
         """
         ### YOUR CODE HERE
+        # y: (1000,10) one-hot encoded vector
+        # output: 1000,10 softmax values
+        eps = 1e-12
+        output_clipped = np.clip(output, eps, 1. - eps)
+        loss_per_sample = -np.sum(y * np.log(output_clipped),axis=1)
+        loss = np.mean(loss_per_sample)
 
         ### END YOUR CODE
         return loss
