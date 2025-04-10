@@ -36,7 +36,7 @@ class NN:
         Compute softmax function for input.
         """
         ### YOUR CODE HERE
-        d = np.sum(np.exp(x),axis=1,keepdims=True)
+        d = np.sum(np.exp(x),axis=1,keepdims=True) #[[1,2,3],[3,4,5]]
         s = np.exp(x)/d
         ### END YOUR CODE
         return s
@@ -52,12 +52,14 @@ class NN:
             weights_1 = pickle.load(f)
         with open('weights_2.pkl', 'rb') as f:
             weights_2 = pickle.load(f)
-        with open('bias.pkl', 'wb') as f:
-            bias = pickle.load(f)
+        with open('bias_1.pkl', 'wb') as f:
+            bias_1 = pickle.load(f)
+        with open('bias_2.pkl', 'wb') as f:
+            bias_2 = pickle.load(f)
         
-        Z1 = X @ weights_1 + bias # 1000,300
+        Z1 = X @ weights_1 + bias_1 # 1000,300
         A1 = self.sigmoid(Z_1) 
-        Z2 = Z_1 @ weights_2 # 1000,10
+        Z2 = Z_1 @ weights_2 + bias_2 # 1000,10
         A2 = self.softmax(Z_2)
 
         ### END YOUR CODE
@@ -87,7 +89,7 @@ class NN:
     def init_weights(self, n_input):
         ### YOUR CODE HERE
         
-        # 784x300 = 235200
+        # 784x300
         weights_1 = np.random.normal(loc=0, scale=1, size=(784,300))
         with open('weights_1.pkl', 'wb') as f:
             pickle.dump(weights_1, f)
@@ -102,7 +104,7 @@ class NN:
         with open('bias_1.pkl', 'wb') as f:
             pickle.dump(bias_1, f)
 
-        bias_2 = np.zeros((1,300))
+        bias_2 = np.zeros((1,10))
         with open('bias_2.pkl', 'wb') as f:
             pickle.dump(bias_2, f)
 
