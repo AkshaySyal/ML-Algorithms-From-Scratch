@@ -15,5 +15,18 @@ Image size: 28x28 <br>
 ### Number of hidden units: 300
 ### Batch size: 1000
 ### Epochs: 30
-
+## Backpropagation formulae
+### High Level steps
+- Find derivative wrt activation layer (Z)
+- Find derivative wrt pre-activation layer (A)
+- Find derivative wrt Weights (W) and bias (B)
+### IMPORTANT POINTS
+#### This simple formula results from these facts:
+![alt text](image-1.png)
+- Softmax in the final layer,
+- Cross‐entropy as the loss function, and
+- One‐hot labels 
+#### Derivative of sigmoid
+![alt text](image-2.png)
+### Final formulae that I implemented
 ![alt text](image.png)
