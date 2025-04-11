@@ -57,10 +57,10 @@ class NN:
         with open('bias_2.pkl', 'wb') as f:
             bias_2 = pickle.load(f)
         
-        Z1 = X @ weights_1 + bias_1 # 1000,300
-        A1 = self.sigmoid(Z_1) 
-        Z2 = Z_1 @ weights_2 + bias_2 # 1000,10
-        A2 = self.softmax(Z_2)
+        A1 = X @ weights_1 + bias_1 # 1000,300 # Pre-activation
+        Z1 = self.sigmoid(A1) # Hidden layer activation 
+        A2 = Z1 @ weights_2 + bias_2 # 1000,10 # Output layer pre-activation
+        Z2 = self.softmax(A2) # Output layer activation
 
         ### END YOUR CODE
         cache = {}
@@ -75,6 +75,7 @@ class NN:
         Return the gradients of the parameters
         """
         ### YOUR CODE HERE
+        #dW2 = cache['A2'] - y #(1000,10)
 
         ### END YOUR CODE
 

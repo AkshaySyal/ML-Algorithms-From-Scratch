@@ -15,3 +15,5 @@ Image size: 28x28 <br>
 ### Number of hidden units: 300
 ### Batch size: 1000
 ### Epochs: 30
+
+![alt text](image.png)
