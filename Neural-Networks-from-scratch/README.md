@@ -26,6 +26,8 @@ Image size: 28x28 <br>
 - Softmax in the final layer
 - Cross‐entropy as the loss function
 - One‐hot labels 
+#### Derivative of softmax
+![alt text](image-3.png)
 #### Derivative of sigmoid
 ![alt text](image-2.png)
 ### Final formulae that I implemented
