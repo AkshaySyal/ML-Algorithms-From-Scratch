@@ -21,10 +21,10 @@ Image size: 28x28 <br>
 - Find derivative wrt pre-activation layer (A)
 - Find derivative wrt Weights (W) and bias (B)
 ### IMPORTANT POINTS
-#### This simple formula results from these facts:
 ![alt text](image-1.png)
-- Softmax in the final layer,
-- Cross‐entropy as the loss function, and
+#### This simple formula results from these facts:
+- Softmax in the final layer
+- Cross‐entropy as the loss function
 - One‐hot labels 
 #### Derivative of sigmoid
 ![alt text](image-2.png)
