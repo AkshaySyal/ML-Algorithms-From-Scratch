@@ -75,10 +75,19 @@ class NN:
         Return the gradients of the parameters
         """
         ### YOUR CODE HERE
-        #dW2 = cache['A2'] - y #(1000,10)
+        with open('weights_2.pkl', 'wb') as f:
+            weights_2 = pickle.load(f)
+  
+        dA2 = cache['Z2'] - y # 1000,10
+        dW2 = cache['Z1'].T @ dA2 / self.batch_size  # 300,10
+        db2 = np.sum(dA2, keepdims=True, axis=0) / self.batch_size # 1,10 
+
+        dZ1 = dA2 @ weights_2.T # 1000,300
+        dA1 = dZ1 * self.sigmoid_deriv(cache['Z1']) # 1000,300
+        dW1 = X.T @ dA1 / self.batch_size # 784,300
+        db1 = np.sum(dA1,keepdims=True,axis=0) / self.batch_size # 1,300
 
         ### END YOUR CODE
-
         grads = {}
         grads['W1'] = dW1
         grads['b1'] = db1
@@ -89,8 +98,6 @@ class NN:
 
     def init_weights(self, n_input):
         ### YOUR CODE HERE
-        
-        # 784x300
         weights_1 = np.random.normal(loc=0, scale=1, size=(784,300))
         with open('weights_1.pkl', 'wb') as f:
             pickle.dump(weights_1, f)
