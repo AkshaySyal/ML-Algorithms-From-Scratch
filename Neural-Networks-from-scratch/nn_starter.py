@@ -120,7 +120,28 @@ class NN:
 
     def update_weights(self, grads):
         ### YOUR CODE HERE
+        with open('weights_1.pkl','rb') as f:
+            W1 = pickle.load(f)
+        with open('bias_1.pkl','rb') as f:
+            b1 = pickle.load(f)
+        with open('weights_2.pkl','rb') as f:
+            W2 = pickle.load(f)
+        with open('bias_2.pkl','rb') as f:
+            b2 = pickle.load(f)
 
+        W1 -= self.learning_rate * grads['W1']
+        b1 -= self.learning_rate * grads['b1']
+        W2 -= self.learning_rate * grads['W2']
+        b2 -= self.learning_rate * grads['b2']
+
+        with open('weights_1.pkl','wb') as f:
+            pickle.dump(W1, f)
+        with open('bias_1.pkl','wb') as f:
+            pickle.dump(b1, f)
+        with open('weights_2.pkl','wb') as f:
+            pickle.dump(W2, f)
+        with open('bias_2.pkl','wb') as f:
+            pickle.dump(b2, f)
         ### END YOUR CODE
 
     def compute_loss(self, y, output):
