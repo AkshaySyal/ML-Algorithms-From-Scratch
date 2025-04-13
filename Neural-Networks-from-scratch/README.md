@@ -32,3 +32,8 @@ Image size: 28x28 <br>
 ![alt text](image-2.png)
 ### Final formulae that I implemented
 ![alt text](image.png)
+## Results
+<img width="630" alt="Screenshot 2025-04-13 at 4 41 23 PM" src="https://github.com/user-attachments/assets/4e130096-27e5-43b4-883c-884062d92b9e" />
+<img width="601" alt="Screenshot 2025-04-13 at 4 41 38 PM" src="https://github.com/user-attachments/assets/495fec0c-7a8a-4f73-9432-a29112372342" />
+![Screenshot 2025-04-13 at 4 49 21 PM](https://github.com/user-attachments/assets/dccd5fd8-ade1-4031-9745-4359f8fa3a6e)
+
