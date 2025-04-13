@@ -52,9 +52,9 @@ class NN:
             weights_1 = pickle.load(f)
         with open('weights_2.pkl', 'rb') as f:
             weights_2 = pickle.load(f)
-        with open('bias_1.pkl', 'wb') as f:
+        with open('bias_1.pkl', 'rb') as f:
             bias_1 = pickle.load(f)
-        with open('bias_2.pkl', 'wb') as f:
+        with open('bias_2.pkl', 'rb') as f:
             bias_2 = pickle.load(f)
         
         A1 = X @ weights_1 + bias_1 # 1000,300 # Pre-activation
@@ -75,7 +75,7 @@ class NN:
         Return the gradients of the parameters
         """
         ### YOUR CODE HERE
-        with open('weights_2.pkl', 'wb') as f:
+        with open('weights_2.pkl', 'rb') as f:
             weights_2 = pickle.load(f)
   
         dA2 = cache['Z2'] - y # 1000,10
@@ -160,10 +160,74 @@ class NN:
         return loss
 
     def train(self, X_train, y_train, X_val, y_val):
-        (n, m) = X_train.shape
-        self.init_weights(m)
+        # Shapes
+        # X_Train: 50000x784
+        # y_train: 50000,1
+        # X_val: 10000x784
+        # y_val: 10000x1
 
+        (n, m) = X_train.shape 
+        self.init_weights(m)
+        num_batches = n // self.batch_size # 50000/1000 = 50
+        train_losses = []
+        val_losses = []
+        train_accs = []
+        val_accs = []
+        
         ### YOUR CODE HERE
+        for epoch in range(self.epochs):
+            for i in range(num_batches):
+                start_idx = i * self.batch_size
+                end_idx = start_idx + self.batch_size
+
+                X_batch = X_train[start_idx:end_idx]
+                y_batch = y_train[start_idx:end_idx]
+
+                # Forward pass
+                cache,output = self.feedforward(X_batch)
+
+                # Backprop 
+                grads = self.back_propagate(X_batch, y_batch, cache)
+                self.update_weights(grads)
+            
+            # Loss and Accuracy calculation on entire training set
+            train_cache, train_output = self.feed_forward(X_train)
+            train_loss = self.compute_loss(y_train, train_output)
+            train_acc = self.compute_accuracy(train_output, y_train)
+
+            # Forward pass on entire validation set
+            val_cache, val_output = self.feed_forward(X_val)
+            val_loss = self.compute_loss(y_val, val_output)
+            val_acc = self.compute_accuracy(val_output, y_val)
+
+            # Store for plotting
+            train_losses.append(train_loss)
+            val_losses.append(val_loss)
+            train_accs.append(train_acc)
+            val_accs.append(val_acc)
+            print(f"Epoch {epoch+1}/{self.epochs} "
+                  f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, "
+                  f"Train Acc: {train_acc:.4f}, Val Acc: {val_acc:.4f}")
+        
+        # Loss curves
+        plt.figure()
+        plt.plot(range(1, self.epochs+1), train_losses, label='Train Loss')
+        plt.plot(range(1, self.epochs+1), val_losses, label='Validation Loss')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.title('Training and Validation Loss')
+        plt.legend()
+        plt.show()
+
+        # Accuracy curves
+        plt.figure()
+        plt.plot(range(1, self.epochs+1), train_accs, label='Train Accuracy')
+        plt.plot(range(1, self.epochs+1), val_accs, label='Validation Accuracy')
+        plt.xlabel('Epoch')
+        plt.ylabel('Accuracy')
+        plt.title('Training and Validation Accuracy')
+        plt.legend()
+        plt.show()
 
         ### END YOUR CODE
 
